@@ -31,8 +31,8 @@
 
     &:hover,
     &:focus {
-      background-color: var(--secondary-400);
-      border-color: var(--secondary-400);
+      background-color: var(--secondary-300);
+      border-color: var(--secondary-300);
     }
   }
 
@@ -122,10 +122,12 @@
 
   &.type-secondary {
     background-color: transparent;
+    color: var(--secondary-100);
 
     &:hover,
     &:focus {
       background-color: transparent;
+      color: var(--secondary-300);
     }
   }
 
@@ -138,8 +140,4 @@
       width: 30px;
     }
   }
-}
-
-.darkmode .button.type-secondary {
-  color: var(--neutral-100);
 }

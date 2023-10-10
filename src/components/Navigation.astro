@@ -1,222 +1,129 @@
 ---
-import ResponsiveToggle from './ResponsiveToggle.astro'
-import { DarkMode } from 'accessible-astro-components'
-import { Image } from "astro:assets"
-import logo from "../assets/img/logo.svg"
+import ResponsiveToggle from "./ResponsiveToggle.astro";
+import { DarkMode } from "accessible-astro-components";
+import { Image } from "astro:assets";
 ---
 
 <div id="main-navigation" class="is-desktop py-8">
-  <div class="container">
-    <a href="/" class="flex items-center gap-2 !no-underline">
-      <Image src={logo} alt="Your Logo" width="47" height="37" />
-      <span class="font-bold">Accessible Astro</span>
-    </a>
-    <div class="wrapper">
-      <nav class="desktop-menu" aria-label="Main navigation desktop">
+  <div class="container flex flex-col">
+    <div class="flex justify-between">
+      <a href="/" class="flex items-center gap-2 !no-underline">
+        <Image src="/logo.png" alt="My Logo" width="36" height="36" />
+        <span class="font-bold text-[var(--secondary-100)] hover:text-[var(--secondary-300)]">hup - hup</span>
+      </a>
+      <div class="wrapper">
+        <nav class="desktop-menu" aria-label="Main navigation desktop">
+          <ul class="menu">
+            <slot />
+          </ul>
+        </nav>
+        <DarkMode />
+        <ResponsiveToggle />
+      </div>
+    </div>
+    <div class="flex w-full justify-end">
+      <nav class="mobile-menu" aria-label="Main navigation mobile">
         <ul class="menu">
           <slot />
         </ul>
       </nav>
-      <DarkMode />
-      <ResponsiveToggle />
     </div>
-    <nav class="mobile-menu" aria-label="Main navigation mobile">
-      <ul class="menu">
-        <slot />
-      </ul>
-    </nav>
   </div>
 </div>
 
 <script>
   // variables
-  const mainNav = document.querySelector('#main-navigation')
-  const mainMenu = mainNav.querySelector('ul')
-  const dropdownMenus = [...document.querySelectorAll('.has-dropdown button')]
+  const mainNav = document.querySelector("#main-navigation");
+  const mainMenu = mainNav?.querySelector("ul");
 
   // functions
   const setActiveMenuItem = () => {
-    const mobileDesktopMenus = mainNav.querySelectorAll('nav > ul')
-    const currenPathname = window.location.pathname
+    const mobileDesktopMenus = mainNav?.querySelectorAll("nav > ul");
+    const currenPathname = window.location.pathname;
 
-    mobileDesktopMenus.forEach((menu) => {
-      const menuItems = [...menu.querySelectorAll('a:not([rel*="external"])')] as HTMLAnchorElement[]
+    mobileDesktopMenus?.forEach((menu) => {
+      const menuItems = [...menu.querySelectorAll('a:not([rel*="external"])')] as HTMLAnchorElement[];
 
       menuItems.forEach((menuItem) => {
-        if (currenPathname.includes(menuItem.pathname.replaceAll('/', '')) && menuItem.textContent !== 'Home') {
-          menuItem.classList.add('is-active')
-          menuItem.setAttribute('aria-current', 'page')
-        } else if (menuItem.textContent === 'Home' && currenPathname === '/') {
-          menuItem.classList.add('is-active')
-          menuItem.setAttribute('aria-current', 'page')
+        if (currenPathname.includes(menuItem.pathname.replaceAll("/", "")) && menuItem.textContent !== "Home") {
+          menuItem.classList.add("is-active");
+          menuItem.setAttribute("aria-current", "page");
+        } else if (menuItem.textContent === "Home" && currenPathname === "/") {
+          menuItem.classList.add("is-active");
+          menuItem.setAttribute("aria-current", "page");
         }
-      })
-    })
-  }
+      });
+    });
+  };
 
   const checkMenuSize = () => {
-    const mainNavWidth = mainNav.getBoundingClientRect().width
-    const desktopMenuWidth = document.querySelector('.desktop-menu').getBoundingClientRect().width
-    const logoWidthBuffer = 300
-    const totalMenuWidth = Math.round(desktopMenuWidth) + logoWidthBuffer
+    const mainNavWidth = mainNav?.getBoundingClientRect().width ?? 0;
+    const desktopMenuWidth = document.querySelector(".desktop-menu")?.getBoundingClientRect().width;
+    const logoWidthBuffer = 300;
+    const totalMenuWidth = Math.round(desktopMenuWidth ?? 0) + logoWidthBuffer;
 
     if (totalMenuWidth >= mainNavWidth) {
-      mainNav.classList.remove('is-desktop')
-      mainNav.classList.add('is-mobile')
+      mainNav?.classList.remove("is-desktop");
+      mainNav?.classList.add("is-mobile");
     } else if (totalMenuWidth <= mainNavWidth) {
-      mainNav.classList.add('is-desktop')
-      mainNav.classList.remove('is-mobile')
+      mainNav?.classList.add("is-desktop");
+      mainNav?.classList.remove("is-mobile");
     }
-  }
-
-  const isOutOfViewport = (element) => {
-    const elementBounds = element.getBoundingClientRect()
-    return elementBounds.right > (window.innerWidth || document.documentElement.clientWidth)
-  }
-
-  const openDropdownMenu = (dropdownMenu) => {
-    const dropdownList = dropdownMenu.parentNode.querySelector('ul')
-
-    dropdownMenu.classList.add('show')
-    dropdownMenu.setAttribute('aria-expanded', 'true')
-
-    if (isOutOfViewport(dropdownList)) {
-      dropdownList.style.left = 'auto'
-    }
-  }
-
-  const closeDropdownMenu = (dropdownMenu) => {
-    dropdownMenu.classList.remove('show')
-    dropdownMenu.setAttribute('aria-expanded', 'false')
-  }
-
-  const closeAllDropdownMenus = () => {
-    for (let i = 0; i < dropdownMenus.length; i++) {
-      closeDropdownMenu(dropdownMenus[i])
-    }
-  }
-
-  const toggleDropdownMenu = (event) => {
-    if (event.target.getAttribute('aria-expanded') === 'false') {
-      closeAllDropdownMenus()
-      openDropdownMenu(event.target)
-    } else {
-      closeDropdownMenu(event.target)
-    }
-  }
+  };
 
   // execution
   mainMenu &&
-    mainMenu.addEventListener('keydown', (event) => {
-      const element = event.target as Element
-      const currentMenuItem = element.closest('li')
-      const menuItems = [...mainMenu.querySelectorAll('.menu-item')]
-      const currentDropdownMenu = element.closest('.has-dropdown button')
-      const currentDropdownMenuItem = element.closest('.has-dropdown li')
-      const currentIndex = menuItems.findIndex((item) => item === currentMenuItem)
+    mainMenu.addEventListener("keydown", (event) => {
+      const element = event.target as Element;
+      const currentMenuItem = element.closest("li");
+      const menuItems = [...mainMenu.querySelectorAll(".menu-item")];
+      const currentIndex = menuItems.findIndex((item) => item === currentMenuItem);
 
-      const key = event.key
-      let targetItem
+      const key = event.key;
+      let targetItem;
 
-      if (key === 'ArrowRight') {
+      if (key === "ArrowRight" && currentMenuItem) {
         if (menuItems.indexOf(currentMenuItem) === menuItems.length - 1) {
-          targetItem = menuItems[0]
+          targetItem = menuItems[0];
         } else {
-          targetItem = menuItems[currentIndex + 1]
+          targetItem = menuItems[currentIndex + 1];
         }
       }
 
-      if (key === 'ArrowLeft') {
+      if (key === "ArrowLeft" && currentMenuItem) {
         if (menuItems.indexOf(currentMenuItem) === 0) {
-          targetItem = menuItems[menuItems.length - 1]
+          targetItem = menuItems[menuItems.length - 1];
         } else {
-          targetItem = menuItems[currentIndex - 1]
+          targetItem = menuItems[currentIndex - 1];
         }
       }
 
-      if (key === 'Escape') {
-        targetItem = menuItems[0]
-      }
-
-      if (currentDropdownMenu) {
-        const firstDropdownItem = currentDropdownMenu.nextElementSibling.querySelector('li')
-
-        if (key === 'ArrowDown') {
-          event.preventDefault()
-          openDropdownMenu(currentDropdownMenu)
-          targetItem = firstDropdownItem
-        }
-
-        if (key === 'Escape') {
-          closeDropdownMenu(currentDropdownMenu)
-        }
-      }
-
-      if (currentDropdownMenuItem) {
-        const currentDropdownList = currentDropdownMenuItem.parentNode
-        const dropdownMenuItems = [...currentDropdownList.querySelectorAll('li')]
-        const currentIndex = dropdownMenuItems.findIndex((item) => item === currentDropdownMenuItem)
-
-        if (key === 'ArrowDown') {
-          event.preventDefault()
-
-          if (dropdownMenuItems.indexOf(currentDropdownMenuItem as HTMLLIElement) === dropdownMenuItems.length - 1) {
-            targetItem = dropdownMenuItems[0]
-          } else {
-            targetItem = dropdownMenuItems[currentIndex + 1]
-          }
-        }
-
-        if (key === 'ArrowUp') {
-          event.preventDefault()
-
-          if (dropdownMenuItems.indexOf(currentDropdownMenuItem as HTMLLIElement) === 0) {
-            targetItem = dropdownMenuItems[dropdownMenuItems.length - 1]
-          } else {
-            targetItem = dropdownMenuItems[currentIndex - 1]
-          }
-        }
-
-        if (key === 'Escape') {
-          const currentDropdownMenu = (currentDropdownList as Element).previousElementSibling
-          targetItem = currentDropdownMenu.parentNode
-          closeAllDropdownMenus()
-        }
+      if (key === "Escape") {
+        targetItem = menuItems[0];
       }
 
       if (targetItem) {
-        targetItem.querySelector('a, button, input').focus()
+        targetItem.querySelector("a, button, input").focus();
       }
-    })
+    });
 
-  dropdownMenus &&
-    dropdownMenus.forEach((dropdownMenu) => {
-      dropdownMenu.addEventListener('click', toggleDropdownMenu)
-    })
+  setActiveMenuItem();
+  checkMenuSize();
 
-  setActiveMenuItem()
-  checkMenuSize()
-
-  window.addEventListener('resize', checkMenuSize)
-  window.addEventListener('click', (event) => {
-    const element = event.target as Element
-    if (!element.hasAttribute('aria-haspopup') && !element.classList.contains('submenu-item')) {
-      closeAllDropdownMenus()
+  window.addEventListener("resize", checkMenuSize);
+  window.addEventListener("click", (event) => {
+    const element = event.target as Element;
+    if (!element.hasAttribute("aria-haspopup") && !element.classList.contains("mobile-menu")) {
+      mainNav?.classList.remove("show");
     }
-  })
+  });
 </script>
 
 <style lang="scss" is:global>
-  @use '../assets/scss/base/breakpoint' as *;
-  @use '../assets/scss/base/outline' as *;
+  @use "../assets/scss/base/breakpoint" as *;
+  @use "../assets/scss/base/outline" as *;
 
   #main-navigation {
-    > .container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
     &.is-desktop {
       .desktop-menu {
         visibility: visible;
@@ -277,12 +184,10 @@ import logo from "../assets/img/logo.svg"
 
         a:hover,
         a:focus,
-        .is-active,
-        .has-dropdown > button:hover,
-        .has-dropdown > button:focus {
+        .is-active {
           text-decoration: underline;
           text-decoration-thickness: 1px;
-          text-decoration-style: wavy;
+          text-decoration-style: solid;
           text-underline-offset: 7px;
         }
 
@@ -293,8 +198,13 @@ import logo from "../assets/img/logo.svg"
     }
 
     .mobile-menu {
-      flex-basis: 100%;
-      padding: 2rem 0;
+      position: absolute;
+      z-index: 10;
+      right: 0;
+      width: 50%;
+      padding: 8px;
+      border-radius: 16px;
+      background-color: var(--neutral-background);
 
       > ul {
         flex-direction: column;
@@ -310,67 +220,6 @@ import logo from "../assets/img/logo.svg"
         display: block;
         width: 100%;
         padding: 0.5rem 0;
-      }
-    }
-
-    .has-dropdown {
-      position: relative;
-
-      > button {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0;
-        margin-top: -1px;
-        border: none;
-        color: var(--action-color);
-
-        &:hover {
-          color: var(--action-color-state);
-
-          &::after {
-            border-color: var(--action-color-state);
-          }
-        }
-
-        &::after {
-          content: '';
-          width: 0.85rem;
-          height: 0.75em;
-          margin-top: -0.25rem;
-          border-style: solid;
-          border-width: 0.2em 0.2em 0 0;
-          border-color: var(--action-color);
-          transform: rotate(135deg);
-        }
-
-        &.show {
-          &::after {
-            margin-top: 0.25rem;
-            transform: rotate(-45deg);
-          }
-
-          ~ ul {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-          }
-        }
-      }
-
-      ul {
-        display: none;
-        position: absolute;
-        z-index: 100;
-        min-width: 260px;
-        top: 125%;
-        right: 0;
-        bottom: auto;
-        left: 0;
-        padding: 1rem;
-        background-color: var(--neutral-background);
-        border: 2px solid black;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
       }
     }
   }

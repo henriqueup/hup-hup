@@ -1,47 +1,19 @@
 ---
-import { Icon } from "astro-icon";
-
-const { src = "/astronaut-hero-img.webp" } = Astro.props;
+import ActionButtons from "./ActionButtons.astro";
 ---
 
 <section class="hero my-24">
   <div class="container">
-    <div class="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
-      <div class="flex flex-col items-center gap-8 md:items-start">
-        <h1 class="text-center text-6xl md:text-left lg:text-8xl">
-          <slot><span class="text-gradient">Accessible</span> Starter for Astro</slot>
-        </h1>
-        <div class="flex flex-col gap-3 min-[500px]:flex-row">
-          <a class="button has-icon" href="https://github.com/markteekman/accessible-astro-starter">
-            <Icon pack="ion" name="star-outline" />
-            Star on GitHub
-          </a>
-          <a
-            class="button has-icon color-secondary"
-            href="https://github.com/markteekman/accessible-astro-starter/blob/main/README.md"
-          >
-            <Icon pack="ion" name="bookmark-outline" />
-            Read the Docs
-          </a>
+    <div class="flex flex-col-reverse items-center gap-8 md:flex-row">
+      <div class="flex w-min flex-col items-center gap-8 md:w-1/2 md:items-start">
+        <div class="flex w-full flex-col items-start gap-2 md:gap-4">
+          <h1 class="text-6xl text-[var(--action-color)] md:text-8xl">hup</h1>
+          <p class="text-2xl italic md:text-4xl">exclamation</p>
+          <p class="text-xl font-bold md:text-2xl">"used as a way of encouraging a marching rhythm"</p>
         </div>
+        <ActionButtons />
       </div>
-      <img class="hidden lg:block" src={src} alt="" decoding="async" />
+      <img class="w-1/2 rounded-full" src="/profile.jpg" alt="" decoding="async" />
     </div>
   </div>
 </section>
-
-<style lang="scss">
-  .text-gradient {
-    background: linear-gradient(315deg, var(--primary-200) 0%, var(--secondary-200));
-    background-clip: border-box;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  :global(.darkmode .text-gradient) {
-    background: linear-gradient(315deg, var(--primary-200) 0%, var(--secondary-200));
-    background-clip: border-box;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-</style>

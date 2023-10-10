@@ -1,0 +1,25 @@
+---
+import Icon from "astro-icon";
+---
+
+<div class="flex flex-col gap-3 md:flex-row">
+  <a class="button has-icon icon-parent color-secondary min-w-[200px] !py-2" href="https://lemonfy.vercel.app/">
+    <Icon name="logo1" fill="#000000" class="logo-icon" />
+    Visit Lemonfy
+  </a>
+  <a class="button has-icon type-secondary min-w-[200px]" href="/cv">
+    <Icon pack="ion" name="document-text-outline" />
+    Read my CV
+  </a>
+</div>
+
+<style lang="scss">
+  .icon-parent:hover .logo-icon {
+    color: var(--secondary-300);
+  }
+
+  .logo-icon {
+    color: var(--secondary-100);
+    width: 40px !important;
+  }
+</style>

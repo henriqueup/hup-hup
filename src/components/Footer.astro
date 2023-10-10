@@ -1,18 +1,22 @@
 ---
-import CallToAction from './CallToAction.astro'
+import CallToAction from "./CallToAction.astro";
 
-const currentYear = new Date().getFullYear()
+type Props = {
+  showCallToAction?: boolean;
+};
+
+const { showCallToAction = false } = Astro.props;
+
+const currentYear = new Date().getFullYear();
 ---
 
 <footer>
-  <CallToAction />
+  {showCallToAction && <CallToAction />}
   <section class="py-8">
-    <div class="container">
-      <p>
-        &copy; {currentYear} - Starter Theme for <a href="https://astro.build/">Astro</a>. Made with ❤️ by <a
-          href="https://github.com/markteekman">Mark Teekman</a
-        >.
-      </p>
+    <div class="container flex flex-col justify-between md:flex-row">
+      <span> &copy; {currentYear} - HUP's Portfolio.</span><span>
+        Made with ❤️ by <a href="https://github.com/henriqueup">Henrique Urban Pessoa</a>
+      </span>
     </div>
   </section>
 </footer>

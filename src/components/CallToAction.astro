@@ -1,30 +1,27 @@
+---
+import ActionButtons from "./ActionButtons.astro";
+---
+
 <div class="container">
-  <div class="call-to-action mt-24 mb-32 flex flex-col items-center gap-12 rounded-xl p-12 md:p-24">
-    <h2 class="text-center text-3xl md:text-5xl">Get this theme on GitHub</h2>
-    <a href="https://github.com/markteekman/accessible-astro-starter" class="text-center text-lg"> Use this theme</a>
+  <div
+    class="my-12 flex flex-col items-center gap-12 rounded-xl bg-[var(--primary-100)] p-12 dark:bg-[var(--primary-500)] md:gap-16 md:p-16"
+  >
+    <p class="text-center text-3xl md:text-5xl">
+      Get to know <span class="text-[var(--primary-300)] dark:text-[var(--primary-100)]">me</span> and <span
+        class="text-[var(--secondary-200)] dark:text-[var(--secondary-100)]">my work</span
+      > a little better
+    </p>
+    <ActionButtons />
   </div>
 </div>
 
 <style lang="scss">
-  .call-to-action {
-    color: var(--neutral-900);
-    background-image: linear-gradient(40deg, var(--primary-100), var(--secondary-200));
+  .icon-parent:hover .logo-icon {
+    color: var(--action-color-state);
   }
 
-  .call-to-action a:not(button),
-  .call-to-action a:not(button):visited {
-    padding: 1rem;
-    color: var(--neutral-900);
-    font-weight: bold;
-    border: 3px solid var(--neutral-900);
-    border-radius: 3px;
-    text-decoration: none;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
-
-    &:where(:hover, :focus) {
-      color: var(--neutral-100);
-      background-color: var(--neutral-900);
-      text-decoration: underline;
-    }
+  .logo-icon {
+    color: var(--action-color);
+    width: 40px !important;
   }
 </style>

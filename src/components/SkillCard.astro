@@ -1,0 +1,93 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { icon = "mdi:rocket", title = "Title" } = Astro.props;
+---
+
+<div class="skill-card flex flex-col justify-start gap-4">
+  <Icon name={icon} size={64} class="skill-card-icon min-h-[64px] dark:fill-white" />
+  <div class="content">
+    <h3>{title}</h3>
+    <p class="description">
+      <slot />
+    </p>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../assets/scss/base/breakpoint" as *;
+
+  .skill-card {
+    position: relative;
+    width: calc(100% - 1rem);
+    padding: 2rem;
+    max-height: 262px;
+    // transition: max-height 0.5s ease-in-out;
+
+    > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    @include breakpoint(large) {
+      width: 100%;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+    }
+
+    &::before {
+      inset: 0;
+      background-color: var(--neutral-100);
+      border: 3px solid var(--neutral-700);
+      border-radius: 1rem;
+      box-shadow: 0 0 0 6px var(--neutral-100);
+      z-index: 1;
+    }
+
+    &::after {
+      background-color: var(--action-color);
+      inset: 1rem -0.85rem -0.85rem 1rem;
+      border-radius: 1rem;
+      z-index: 0;
+      overflow: visible;
+    }
+
+    &:hover {
+      max-height: 900px;
+      transition: max-height 0.5s ease-in-out;
+    }
+  }
+
+  .description {
+    max-height: 72px;
+    // min-height: 72px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    // transition: max-height 0.5s ease-in-out;
+  }
+
+  .skill-card:hover .description {
+    max-height: 900px;
+    display: block;
+    transition: max-height 0.5s ease-in-out;
+    // -webkit-line-clamp: 0;
+    // position: absolute;
+  }
+
+  .skill-card .skill-card-icon {
+    width: 4rem;
+    height: 4rem;
+    color: var(--action-color);
+  }
+
+  :global(.darkmode .skill-card::before) {
+    background-color: var(--dark-100);
+    box-shadow: 0 0 0 6px var(--dark-100);
+  }
+</style>

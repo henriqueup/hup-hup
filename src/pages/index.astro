@@ -1,44 +1,64 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import Hero from "../components/Hero.astro";
-import Feature from "../components/Feature.astro";
+import SkillCard from "../components/SkillCard.astro";
 import Counter from "../components/Counter.astro";
 import ContentMedia from "../components/ContentMedia.astro";
+
+type Skill = {
+  title: string;
+  description?: string;
+  icon: string;
+};
+
+const skills: Skill[] = [
+  {
+    title: "TypeScript (JS)",
+    icon: "devicon:typescript",
+    description:
+      "Been using JS pretty much ever since I began learning programming, all the way through my whole career so far. Been using JS pretty much ever since I began learning programming, all the way through my whole career so far. Been using JS pretty much ever since I began learning programming, all the way through my whole career so far. Been using JS pretty much ever since I began learning programming, all the way through my whole career so far. ",
+  },
+  {
+    title: "React",
+    icon: "devicon:react",
+    description: "A core part of my experience, used it for my practical Bachelor's thesis and most of my career.",
+  },
+  {
+    title: ".NET Core",
+    icon: "devicon:dotnetcore",
+    description: "",
+  },
+  {
+    title: "Next.js",
+    icon: "devicon:nextjs",
+    description: "",
+  },
+  {
+    title: "Node.js",
+    icon: "devicon:nodejs",
+    description: "",
+  },
+  {
+    title: "Astro",
+    icon: "devicon:astro",
+    description: "",
+  },
+];
 ---
 
 <DefaultLayout title="Home" showCallToAction>
   <Hero />
-  <section class="my-64">
+  <section class="my-32 md:my-64">
     <div class="container">
-      <h2 class="mb-16 text-6xl">Features</h2>
+      <h2 class="mb-16 text-6xl">Skills</h2>
       <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-        <Feature icon="mdi:tailwind" title="Tailwind CSS">
-          Use the power of Tailwind to greatly improve your productivity and enhance your developer workflow.
-        </Feature>
-        <Feature icon="mdi:wheelchair-accessibility" title="a11y Components">
-          17 components and counting, all tried and tested for the most optimal accessible experience for your visitors.
-        </Feature>
-        <Feature icon="mdi:looks" title="Prettier">
-          Less worry about formatting your code, let the Astro Prettier integration do the heavy lifting.
-        </Feature>
-        <Feature icon="mdi:eslint" title="ESLint">
-          Lint your code with strict a11y settings to ensure you stay on track with the WCAG standards.
-        </Feature>
-        <Feature icon="mdi:book-open-page-variant" title="Blog">
-          This theme comes with a fully integrated blog, dynamic pages and SEO optimization.
-        </Feature>
-        <Feature icon="mdi:language-markdown" title="Markdown & MDX">
-          Easily use .md and .mdx pages to build your websites or use it with Netlify CMS.
-        </Feature>
-        <Feature icon="mdi:theme-light-dark" title="Dark mode">
-          Fully integrated Dark mode gives your users the choice for their favorite viewing mode.
-        </Feature>
-        <Feature icon="mdi:cog" title="Design System">
-          The theme offers some very handy utilities to help you build your website faster.
-        </Feature>
-        <Feature icon="mdi:lighthouse" title="Lighthouse Scores">
-          Excellent lighthouse scores means your website will load faster and get better SEO rankings.
-        </Feature>
+        {
+          skills.map((skill) => (
+            <SkillCard key={skill.title} icon={skill.icon} title={skill.title}>
+              {skill.description}
+            </SkillCard>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -59,7 +79,7 @@ import ContentMedia from "../components/ContentMedia.astro";
       reaching WCAG AA compliance.
     </p>
   </ContentMedia>
-  <section class="mt-64 mb-32">
+  <section class="mb-16 mt-32 md:mb-32 md:mt-64">
     <div class="container">
       <h2 class="mb-16 text-6xl">Counters</h2>
       <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">

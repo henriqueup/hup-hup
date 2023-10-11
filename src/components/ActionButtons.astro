@@ -1,14 +1,14 @@
 ---
-import Icon from "astro-icon";
+import { Icon } from "astro-icon/components";
 ---
 
 <div class="flex flex-col gap-3 md:flex-row">
   <a class="button has-icon icon-parent color-secondary min-w-[200px] !py-2" href="https://lemonfy.vercel.app/">
-    <Icon name="logo1" fill="#000000" class="logo-icon" />
+    <Icon name="logo1" size={40} class="logo-icon" />
     Visit Lemonfy
   </a>
   <a class="button has-icon type-secondary min-w-[200px]" href="/cv">
-    <Icon pack="ion" name="document-text-outline" />
+    <Icon name="ion:document-text-outline" size={40} />
     Read my CV
   </a>
 </div>
@@ -20,6 +20,6 @@ import Icon from "astro-icon";
 
   .logo-icon {
     color: var(--secondary-100);
-    width: 40px !important;
+    fill: #000000;
   }
 </style>

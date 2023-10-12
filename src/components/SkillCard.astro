@@ -4,13 +4,16 @@ import { Icon } from "astro-icon/components";
 const { icon = "mdi:rocket", title = "Title" } = Astro.props;
 ---
 
-<div class="skill-card flex flex-col justify-start gap-4">
-  <Icon name={icon} size={64} class="skill-card-icon min-h-[64px] dark:fill-white" />
-  <div class="content">
-    <h3>{title}</h3>
-    <p class="description">
-      <slot />
-    </p>
+<div class="skill-card">
+  <div class="relative flex h-fit flex-col justify-start gap-4 p-8">
+    <Icon name={icon} size={64} class="skill-card-icon min-h-[64px] dark:fill-white" />
+    <div class="content relative">
+      <h3>{title}</h3>
+      <div class="description">
+        <slot />
+      </div>
+      <div class="show-more absolute right-3 cursor-pointer text-[var(--action-color)]"></div>
+    </div>
   </div>
 </div>
 
@@ -20,9 +23,8 @@ const { icon = "mdi:rocket", title = "Title" } = Astro.props;
   .skill-card {
     position: relative;
     width: calc(100% - 1rem);
-    padding: 2rem;
-    max-height: 262px;
-    // transition: max-height 0.5s ease-in-out;
+    height: 269px;
+    transition: height 0.5s ease-in-out, top 0.5s ease-in-out;
 
     > * {
       position: relative;
@@ -53,31 +55,22 @@ const { icon = "mdi:rocket", title = "Title" } = Astro.props;
       inset: 1rem -0.85rem -0.85rem 1rem;
       border-radius: 1rem;
       z-index: 0;
-      overflow: visible;
-    }
-
-    &:hover {
-      max-height: 900px;
-      transition: max-height 0.5s ease-in-out;
     }
   }
 
   .description {
-    max-height: 72px;
-    // min-height: 72px;
+    height: 72px;
+    margin-bottom: 0.5rem;
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    // transition: max-height 0.5s ease-in-out;
+    transition: height 0.5s ease-in-out;
   }
 
-  .skill-card:hover .description {
-    max-height: 900px;
-    display: block;
-    transition: max-height 0.5s ease-in-out;
-    // -webkit-line-clamp: 0;
-    // position: absolute;
+  .show-more {
+    display: none;
+
+    &.show {
+      display: block;
+    }
   }
 
   .skill-card .skill-card-icon {
@@ -91,3 +84,68 @@ const { icon = "mdi:rocket", title = "Title" } = Astro.props;
     box-shadow: 0 0 0 6px var(--dark-100);
   }
 </style>
+
+<script>
+  //variables
+  const skillCardElements = document.querySelectorAll<HTMLDivElement>(".skill-card");
+
+  const showMoreButtonLabels = {
+    more: "+ Show more",
+    less: "- Show less",
+  };
+  const defaultDimensions = {
+    skillCard: 269,
+    description: 72,
+  };
+
+  //functions
+  const getChildElements = (
+    skillCardElement: Element
+  ): { descriptionElement?: HTMLElement; showMoreButton?: HTMLElement } => ({
+    descriptionElement: skillCardElement.querySelector<HTMLElement>(".description") ?? undefined,
+    showMoreButton: skillCardElement.querySelector<HTMLElement>(".show-more") ?? undefined,
+  });
+
+  const toggleShowMoreButton = (skillCardElement: HTMLElement) => {
+    const { descriptionElement, showMoreButton } = getChildElements(skillCardElement);
+    if (!showMoreButton || !descriptionElement) return;
+
+    if (!showMoreButton.textContent) {
+      showMoreButton.textContent = showMoreButtonLabels.more;
+      return;
+    }
+
+    const shouldShrink = showMoreButton.textContent === showMoreButtonLabels.less;
+
+    descriptionElement.setAttribute("aria-expanded", shouldShrink ? "false" : "true");
+    showMoreButton.textContent = shouldShrink ? showMoreButtonLabels.more : showMoreButtonLabels.less;
+
+    const heightDifference = descriptionElement.scrollHeight - descriptionElement.clientHeight;
+    descriptionElement.style.height = shouldShrink
+      ? `${defaultDimensions.description}px`
+      : `${defaultDimensions.description + heightDifference}px`;
+    skillCardElement.style.height = shouldShrink
+      ? `${defaultDimensions.skillCard}px`
+      : `${defaultDimensions.skillCard + heightDifference}px`;
+  };
+
+  //execution
+  skillCardElements.forEach((skillCardElement) => {
+    const { descriptionElement, showMoreButton } = getChildElements(skillCardElement);
+
+    const descriptionIsOverflowing = (descriptionElement?.clientHeight ?? 0) < (descriptionElement?.scrollHeight ?? 0);
+    if (descriptionIsOverflowing) {
+      showMoreButton?.classList.add("show");
+      toggleShowMoreButton(skillCardElement);
+    }
+  });
+
+  window.addEventListener("click", (event) => {
+    const target = event.target as Element;
+
+    const skillCardElement = target.parentElement?.parentElement?.parentElement;
+    if (skillCardElement && target.classList.contains("show-more")) {
+      toggleShowMoreButton(skillCardElement);
+    }
+  });
+</script>

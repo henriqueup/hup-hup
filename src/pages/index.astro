@@ -7,7 +7,7 @@ import ContentMedia from "../components/ContentMedia.astro";
 
 type Skill = {
   title: string;
-  description?: string;
+  description?: string | string[];
   icon: string;
 };
 
@@ -15,33 +15,60 @@ const skills: Skill[] = [
   {
     title: "TypeScript (JS)",
     icon: "devicon:typescript",
-    description:
-      "Been using JS pretty much ever since I began learning programming, all the way through my whole career so far. Been using JS pretty much ever since I began learning programming, all the way through my whole career so far. Been using JS pretty much ever since I began learning programming, all the way through my whole career so far. Been using JS pretty much ever since I began learning programming, all the way through my whole career so far. ",
+    description: [
+      "Been using JS pretty much ever since I began learning programming, all the way through my whole career so far.",
+      "This includes both backend and frontend systems and is almost always paired with some frameworks - such as React, Node.js, Next.js, Astro etc - or some other language - such as HTML, CSS etc.",
+    ],
   },
   {
     title: "React",
     icon: "devicon:react",
-    description: "A core part of my experience, used it for my practical Bachelor's thesis and most of my career.",
+    description:
+      "A core part of my experience, used it for my practical Bachelor's thesis and most of my career. It's been my go-to frontend framework and I've had the chance to use it in many contexts.",
   },
   {
-    title: ".NET Core",
+    title: ".NET Core (C#)",
     icon: "devicon:dotnetcore",
-    description: "",
+    description: [
+      "My first professional experience building backends was with .NET Core. I started with the basics, building CRUD REST APIs and such.",
+      "I then went on to use it for 3 years and had the chance to go deep into many important concepts. Clean Architecture, Dependency Injection, Inversion of Control, Authentication and Authorization, DB integration, to name a few.",
+    ],
+  },
+  {
+    title: "SQL",
+    icon: "devicon:azuresqldatabase",
+    description: [
+      "I have worked mostly with relational databases using SQL through my career. I've had the chance to work both directly with SQL commands and with ORMs.",
+      "While ORMs can come in handy and spare a lot of effort, the liberty and efficiency of writing your own scripts also has it's place. In addition, it allowed me to delve deeper into some concepts like indexes, table joins, aggregations, triggers and stored procedures.",
+    ],
+  },
+  {
+    title: "Azure",
+    icon: "devicon:azure",
+    description: [
+      "As far as Cloud, DevOps, CI/CD and SCRUM goes, most of my experience is in Azure.",
+      "I also participated in a demand to create the Infra as Code of an old and large system with ARM templates, which had me learn a lot about infrastructure, Cloud resources, app insights etc.",
+    ],
   },
   {
     title: "Next.js",
     icon: "devicon:nextjs",
-    description: "",
+    description: [
+      "This framework was an eye opener for me. When I started to think about a personal project to work on, some fellow developers suggested Next.js.",
+      "At first it was a confusing but interesting challenge, using a fullstack framework. I then did a lot of research and picked up on the fully typesafe monorepo trend.",
+      "It was by using the T3 stack that I realized how efficient these new frameworks and libraries allow you to be. And that's how I put Lemonfy together.",
+    ],
   },
   {
     title: "Node.js",
     icon: "devicon:nodejs",
-    description: "",
+    description:
+      "For a short 6 months project, I had the chance to lead the implementation of a few Node.js APIs and put the concepts I'd learned previously to good use.",
   },
   {
     title: "Astro",
     icon: "devicon:astro",
-    description: "",
+    description: "Honourable mention since it's what I built this site with, but that's my only experience with it.",
   },
 ];
 ---
@@ -55,7 +82,15 @@ const skills: Skill[] = [
         {
           skills.map((skill) => (
             <SkillCard key={skill.title} icon={skill.icon} title={skill.title}>
-              {skill.description}
+              {Array.isArray(skill.description) ? (
+                <div class="flex flex-col gap-3">
+                  {skill.description.map((paragraph) => (
+                    <p>{paragraph}</p>
+                  ))}
+                </div>
+              ) : (
+                skill.description
+              )}
             </SkillCard>
           ))
         }

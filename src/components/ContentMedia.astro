@@ -1,17 +1,103 @@
 ---
 import { Media } from "accessible-astro-components";
+import { Icon } from "astro-icon/components";
 
-const { imgSrc, reverseImg = false } = Astro.props;
+type Props = {
+  imgSrc: string;
+  subtitle?: string;
+  reverseImg?: boolean;
+  zoomable?: boolean;
+};
+
+const { imgSrc, subtitle, reverseImg = false, zoomable = true } = Astro.props;
 ---
 
-<section class="my-32 md:my-64">
+<section id="content-media" class="my-32 md:my-64">
   <div class="container">
-    <div class="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-24">
-      {!reverseImg ? <Media class="rounded-lg" src={imgSrc} /> : ""}
-      <div class="space-content flex flex-col justify-center">
+    <div
+      class={`flex flex-col gap-12 md:gap-24 md:flex-row md:items-center ${
+        reverseImg ? "flex-col-reverse md:flex-row-reverse" : ""
+      }`}
+    >
+      <div class="flex h-full w-full flex-col gap-1 md:h-1/2 md:w-1/2">
+        <div id="image-wrapper" class={`relative h-full w-full ${zoomable ? "md:cursor-zoom-in" : ""}`}>
+          <Media class="rounded-lg" src={imgSrc} />
+          {
+            zoomable && (
+              <Icon aria-label="Zoom in" name="mdi:magnify-plus" class="absolute bottom-2 right-2 hidden md:block" />
+            )
+          }
+        </div>
+        <figcaption class="text-sm">{subtitle}</figcaption>
+      </div>
+      <div class="space-content flex w-full flex-col justify-center md:w-1/2">
         <slot />
       </div>
-      {reverseImg ? <Media class="rounded-lg" src={imgSrc} /> : ""}
     </div>
   </div>
+  {
+    zoomable && (
+      <div class="zoomed-image absolute top-0 z-50 h-screen w-screen cursor-zoom-out bg-black bg-opacity-60">
+        <div class="flex h-full w-full items-center justify-center">
+          <div class="relative flex h-4/5 w-4/5 items-center justify-center">
+            <Media class="max-h-full max-w-full rounded-lg" src={imgSrc} />
+            <Icon
+              aria-label="Close zoom"
+              name="mdi:close-circle-outline"
+              size={24}
+              class="absolute -right-8 -top-8 hidden cursor-pointer md:block"
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
 </section>
+
+<style lang="scss">
+  @use "../assets/scss/base/breakpoint" as *;
+
+  .zoomed-image {
+    display: none;
+
+    @include breakpoint(medium) {
+      &.show {
+        display: block;
+      }
+    }
+  }
+</style>
+
+<script>
+  //variables
+  type ContentMediaComponent = {
+    root: HTMLDivElement;
+    imageWrapper: HTMLDivElement | null;
+    zoomedImage: HTMLDivElement | null;
+  };
+  const contentMediaComponents: ContentMediaComponent[] = [];
+
+  //functions
+  const queryContentMediaComponents = () => {
+    const contentMediaElements = [...document.querySelectorAll<HTMLDivElement>("#content-media").values()];
+
+    contentMediaElements.forEach((cme) => {
+      contentMediaComponents.push({
+        root: cme,
+        imageWrapper: cme.querySelector<HTMLDivElement>("#image-wrapper"),
+        zoomedImage: cme.querySelector<HTMLDivElement>(".zoomed-image"),
+      });
+    });
+  };
+
+  //execution
+  queryContentMediaComponents();
+  document.addEventListener("click", (event) => {
+    const target = event.target as Element;
+
+    contentMediaComponents.forEach((cmc) => {
+      const shouldShowZoom = cmc.imageWrapper?.contains(target);
+      cmc.zoomedImage?.classList.toggle("show", shouldShowZoom);
+    });
+  });
+</script>

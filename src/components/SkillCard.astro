@@ -1,12 +1,27 @@
 ---
 import { Icon } from "astro-icon/components";
 
-const { icon = "mdi:rocket", title = "Title" } = Astro.props;
+type Props = {
+  icon: string | string[];
+  title: string;
+};
+
+const { icon, title = "Title" } = Astro.props;
 ---
 
 <div class="skill-card">
   <div class="relative flex h-fit flex-col justify-start gap-4 p-8">
-    <Icon name={icon} size={64} class="skill-card-icon min-h-[64px] dark:fill-white" />
+    {
+      Array.isArray(icon) ? (
+        <div class="flex gap-2">
+          {icon.map((i) => (
+            <Icon name={i} size={64} class="skill-card-icon min-h-[64px] dark:fill-white" />
+          ))}
+        </div>
+      ) : (
+        <Icon name={icon} size={64} class="skill-card-icon min-h-[64px] dark:fill-white" />
+      )
+    }
     <div class="content relative">
       <h3>{title}</h3>
       <div class="description">

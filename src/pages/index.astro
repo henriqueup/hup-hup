@@ -8,7 +8,7 @@ import ContentMedia from "../components/ContentMedia.astro";
 type Skill = {
   title: string;
   description?: string | string[];
-  icon: string;
+  icon: string | string[];
 };
 
 const skills: Skill[] = [
@@ -16,7 +16,7 @@ const skills: Skill[] = [
     title: "TypeScript (JS)",
     icon: "devicon:typescript",
     description: [
-      "Been using JS pretty much ever since I began learning programming, all the way through my whole career so far.",
+      "I've been using JS pretty much ever since I began learning programming, all the way through my whole career so far.",
       "This includes both backend and frontend systems and is almost always paired with some frameworks - such as React, Node.js, Next.js, Astro etc - or some other language - such as HTML, CSS etc.",
     ],
   },
@@ -56,7 +56,7 @@ const skills: Skill[] = [
     description: [
       "This framework was an eye opener for me. When I started to think about a personal project to work on, some fellow developers suggested Next.js.",
       "At first it was a confusing but interesting challenge, using a fullstack framework. I then did a lot of research and picked up on the fully typesafe monorepo trend.",
-      "It was by using the T3 stack that I realized how efficient these new frameworks and libraries allow you to be. And that's how I put Lemonfy together.",
+      "It was by using the T3 stack that I realized how efficient these new frameworks and libraries allow you to be. And that's also how I put Lemonfy together.",
     ],
   },
   {
@@ -70,6 +70,23 @@ const skills: Skill[] = [
     icon: "devicon:astro",
     description: "Honourable mention since it's what I built this site with, but that's my only experience with it.",
   },
+  {
+    title: "Misc",
+    icon: [
+      "devicon:tailwindcss",
+      "devicon:trpc",
+      "devicon:prisma",
+      "devicon:yaml",
+      "devicon:docker",
+      "devicon:oracle",
+      "devicon:express",
+      "devicon:redux",
+    ],
+    description: [
+      "There are many more libraries, frameworks and systems used within an app's stack which I haven't gone so deep into, or haven't been so relevant, but are worth mentioning.",
+      "Such as: Tailwind CSS, tRPC, Prisma, YAML, Docker, Oracle, Express, Redux, Zustand + Immer.",
+    ],
+  },
 ];
 ---
 
@@ -77,11 +94,11 @@ const skills: Skill[] = [
   <Hero />
   <section class="my-32 md:my-64">
     <div class="container">
-      <h2 class="mb-16 text-6xl">Skills</h2>
+      <h2 class="mb-16 text-6xl">My Skills</h2>
       <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
         {
           skills.map((skill) => (
-            <SkillCard key={skill.title} icon={skill.icon} title={skill.title}>
+            <SkillCard icon={skill.icon} title={skill.title}>
               {Array.isArray(skill.description) ? (
                 <div class="flex flex-col gap-3">
                   {skill.description.map((paragraph) => (
@@ -97,16 +114,25 @@ const skills: Skill[] = [
       </div>
     </div>
   </section>
-  <ContentMedia imgSrc="/accessible-components.webp">
-    <h2>Accessible Components</h2>
+  <ContentMedia imgSrc="/lemonfy-example-1.png" subtitle="Lemonfy's Editor with the tabs for Happy Birthday.">
+    <h2>Lemonfy</h2>
     <p class="text-2xl">
-      This theme provides plenty of tried and tested Accessible Astro Components. Some are native to this theme and a
-      lot of others are integrated using a <a href="https://github.com/markteekman/accessible-astro-components"
-        >separate package</a
-      >. They'll get you up and running in building an accessible solution for your visitors.
+      <a href="/lemonfy">Lemonfy</a> is my main side project, in which I've been learning a lot of new technologies and honing
+      my skills. I've started working on it on Aug/2022, with the goal of uniting a passion for music with the oportunity
+      to study software development.
+    </p>
+    <p class="text-2xl">
+      The project aims to deliver a software capable of music composition and reproduction. It does so using a tablature
+      notation and digital sound synthesis. It contains a Library page, which lists all Songs composed with the system's
+      Editor, allowing anyone to load up and reproduce a Song's tablature and in turn learn how to play it.
     </p>
   </ContentMedia>
-  <ContentMedia imgSrc="/wcag-compliant.webp" reverseImg={true}>
+  <ContentMedia
+    imgSrc="/trail-running.gif"
+    subtitle="Me doing some trail running with a cute dog."
+    reverseImg={true}
+    zoomable={false}
+  >
     <h2>WCAG 2.1 AA Compliant</h2>
     <p class="text-2xl">
       Using semantic HTML, landmarks, skip links, screen reader friendly content, aria-labels, keyboard accessible

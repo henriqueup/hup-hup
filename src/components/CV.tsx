@@ -9,11 +9,16 @@ import CVDocument from "./CVDocument";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const CV = () => {
-  const [isDarkmode, setIsDarkmode] = useState(localStorage.getItem("darkMode") === "enabled");
+  const localStorageValue = localStorage.getItem("darkMode");
+  const prefersDarkmode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDarkmode, setIsDarkmode] = useState(
+    localStorageValue === "enabled" || (prefersDarkmode && localStorageValue !== "disabled")
+  );
   const [pdfInstance, updateRenderedPdf] = usePDF({ document: <CVDocument isDarkmode={isDarkmode} /> });
 
   const { width: windowWidth } = useWindowDimensions();
-  const canvasWidth = (windowWidth > 1200 ? 1200 : windowWidth) - 128;
+  const isLarge = windowWidth > 1200;
+  const canvasWidth = isLarge ? 1200 - 128 : windowWidth - 64;
 
   useEffect(() => {
     function checkDarkmode(event: MouseEvent) {
@@ -41,12 +46,15 @@ const CV = () => {
     <div className="flex flex-col items-center gap-4">
       <div className="flex w-full justify-between">
         <h1>My CV</h1>
-        <a className="button has-icon color-secondary" href={pdfInstance.url} download="hup-CV.pdf">
-          <MdDownloadForOffline className="h-6 w-6" /> Download PDF
-        </a>
+        <div className="flex w-[186px] flex-col gap-2">
+          <a className="button has-icon color-secondary" href={pdfInstance.url} download="hup-CV.pdf">
+            <MdDownloadForOffline className="h-6 w-6" /> Download PDF
+          </a>
+          <span className="hidden text-sm dark:block">(switch back to light theme for white page PDF)</span>
+        </div>
       </div>
-      <div className="w-full bg-[var(--neutral-background)] p-12">
-        <Document file={pdfInstance.url} className="flex w-full flex-col items-center">
+      <div className="w-full bg-[var(--neutral-background)] p-4 md:p-12">
+        <Document file={pdfInstance.url} className="flex h-full w-full flex-col items-center">
           <Page
             pageNumber={1}
             width={canvasWidth}

@@ -4,7 +4,7 @@ import { SkipLinks } from "accessible-astro-components";
 import { Icon } from "astro-icon/components";
 ---
 
-<header>
+<header class="header sticky top-0 z-50 bg-[var(--background)]">
   <SkipLinks />
   <Navigation>
     <li class="menu-item">
@@ -15,9 +15,6 @@ import { Icon } from "astro-icon/components";
     </li>
     <li class="menu-item">
       <a href="/lemonfy">Lemonfy</a>
-    </li>
-    <li class="menu-item">
-      <a href="/about-me">About Me</a>
     </li>
     <!-- <li class="menu-item">
       <a href="/blog/">Blog</a>
@@ -36,6 +33,15 @@ import { Icon } from "astro-icon/components";
 
 <style lang="scss" is:global>
   @use "../assets/scss/base/outline" as *;
+  @use "../assets/scss/base/breakpoint" as *;
+
+  .header {
+    @include breakpoint(large) {
+      padding: 0 calc(2rem / 2);
+      width: 1200px;
+      margin: auto;
+    }
+  }
 
   .type-icon {
     color: var(--action-color);

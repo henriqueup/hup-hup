@@ -33,7 +33,7 @@ const buildStyles = ({ isDarkmode }) =>
     page: {
       flexDirection: "column",
       backgroundColor: isDarkmode ? "hsl(240, 4%, 9%)" : "hsl(0 0% 100%)",
-      color: isDarkmode ? "hsl(0 0% 100%)" : "hsl(210 10% 14%)",
+      color: isDarkmode ? "hsl(205 12% 88%)" : "hsl(210 10% 14%)",
       alignItems: "center",
       padding: "64px 48px",
       gap: "4px",

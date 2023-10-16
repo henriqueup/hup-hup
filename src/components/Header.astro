@@ -24,8 +24,12 @@ import { Icon } from "astro-icon/components";
     </li> -->
     <li class="menu-item type-icon">
       <a href="https://github.com/henriqueup" title="Go to my GitHub page">
-        <Icon name="ion:logo-github" />
+        <Icon name="ion:logo-github" size={32} />
       </a>
+    </li>
+    <li class="menu-item type-icon relative hidden w-8 cursor-copy items-center justify-center md:flex">
+      <Icon class="mail-icon absolute z-10" name="mdi:email" size={32} title="Copy my email address" />
+      <Icon class="clipboard-icon absolute" name="mdi:clipboard-check" size={28} title="Copy my email address" />
     </li>
   </Navigation>
 </header>
@@ -33,25 +37,70 @@ import { Icon } from "astro-icon/components";
 <style lang="scss" is:global>
   @use "../assets/scss/base/outline" as *;
 
-  header {
-    .type-icon a {
-      display: block;
+  .type-icon {
+    color: var(--action-color);
 
-      [astro-icon] {
-        margin-top: -4px;
-        width: 30px;
+    [astro-icon] {
+      margin-top: -4px;
+      width: 30px;
 
-        path {
-          fill: var(--action-color);
-          transition: fill 0.2s ease-in-out;
-        }
+      path {
+        fill: var(--action-color);
+        transition: fill 0.2s ease-in-out;
       }
+    }
 
-      &:hover {
-        [astro-icon] path {
-          fill: var(--action-color-state);
-        }
+    &:hover {
+      color: var(--action-color-state);
+
+      [astro-icon] path {
+        fill: var(--action-color-state);
       }
     }
   }
+
+  .mail-icon {
+    opacity: 1;
+    transition: opacity 0.25s ease-in-out;
+
+    &.hide {
+      opacity: 0;
+    }
+  }
+
+  .clipboard-icon {
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+
+    &.show {
+      opacity: 1;
+    }
+  }
 </style>
+
+<script>
+  //variables
+  const mailIconElement = document.querySelector<HTMLDivElement>(".mail-icon");
+  const clipboardIconElement = document.querySelector<HTMLDivElement>(".clipboard-icon");
+
+  //functions
+  const showClipboardIcon = () => {
+    mailIconElement?.classList.add("hide");
+    clipboardIconElement?.classList.add("show");
+
+    setTimeout(() => {
+      mailIconElement?.classList.remove("hide");
+      clipboardIconElement?.classList.remove("show");
+    }, 1000);
+  };
+
+  //execution
+  document.addEventListener("click", (event) => {
+    const target = event.target as Element;
+
+    if (target === mailIconElement || mailIconElement?.contains(target)) {
+      navigator.clipboard.writeText("titepessoa@gmail.com");
+      showClipboardIcon();
+    }
+  });
+</script>

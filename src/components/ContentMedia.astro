@@ -20,15 +20,17 @@ const { imgSrc, subtitle, reverseImg = false, zoomable = true } = Astro.props;
       }`}
     >
       <div class="flex h-full w-full flex-col gap-1 md:h-1/2 md:w-1/2">
-        <div id="image-wrapper" class={`relative h-full w-full ${zoomable ? "md:cursor-zoom-in" : ""}`}>
-          <Media class="rounded-lg" src={imgSrc} />
-          {
-            zoomable && (
-              <Icon aria-label="Zoom in" name="mdi:magnify-plus" class="absolute bottom-2 right-2 hidden md:block" />
-            )
-          }
+        <div id="image-wrapper" class="flex h-full w-full flex-col items-center">
+          <div class={`relative h-full w-fit ${zoomable ? "md:cursor-zoom-in" : ""}`}>
+            <Media class="rounded-lg" src={imgSrc} />
+            {
+              zoomable && (
+                <Icon aria-label="Zoom in" name="mdi:magnify-plus" class="absolute bottom-2 right-2 hidden md:block" />
+              )
+            }
+          </div>
+          <figcaption class="text-sm">{subtitle}</figcaption>
         </div>
-        <figcaption class="text-sm">{subtitle}</figcaption>
       </div>
       <div class="space-content flex w-full flex-col justify-center md:w-1/2">
         <slot />

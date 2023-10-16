@@ -2,7 +2,6 @@
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import Hero from "../components/Hero.astro";
 import SkillCard from "../components/SkillCard.astro";
-import Counter from "../components/Counter.astro";
 import ContentMedia from "../components/ContentMedia.astro";
 
 type Skill = {
@@ -124,7 +123,7 @@ const skills: Skill[] = [
     <p class="text-2xl">
       The project aims to deliver a software capable of music composition and reproduction. It does so using a tablature
       notation and digital sound synthesis. It contains a Library page, which lists all Songs composed with the system's
-      Editor, allowing anyone to load up and reproduce a Song's tablature and in turn learn how to play it.
+      Editor, allowing anyone to load up and reproduce a Song's tablature, being able to learn how to play it.
     </p>
   </ContentMedia>
   <ContentMedia
@@ -133,22 +132,17 @@ const skills: Skill[] = [
     reverseImg={true}
     zoomable={false}
   >
-    <h2>WCAG 2.1 AA Compliant</h2>
+    <h2>About Me</h2>
     <p class="text-2xl">
-      Using semantic HTML, landmarks, skip links, screen reader friendly content, aria-labels, keyboard accessible
-      navigation and components, clear outlines and tab indicators and the right color contrast, you're more certain of
-      reaching WCAG AA compliance.
+      I consider myself a very sincere and logical person, with a love for nature and music. I'm also a brazillian with
+      a Bachelor's in one of the country's top Computer Science university (UFMG). And I've been a fullstack software
+      engineer since February 2020.
+    </p>
+    <p class="text-2xl">
+      Ever since I was a teenager, growing up with the introduction of MP3 players and PCs, I developed a love for both
+      music and computers. So I think it came naturally that my 2 main hobbies are playing the guitar and videogames. My
+      family also has a countryside house, so I grew up having lots of contact with nature and feel very attached to it.
+      I most recently started running too, hence the GIF of me doing some trail running.
     </p>
   </ContentMedia>
-  <section class="mb-16 mt-32 md:mb-32 md:mt-64">
-    <div class="container">
-      <h2 class="mb-16 text-6xl">Counters</h2>
-      <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">
-        <Counter count="130" title="Stars" sub="On GitHub" />
-        <Counter count="17" title="Accessible" sub="Components" />
-        <Counter count="500" title="Commits" sub="Merged" />
-        <Counter count="18+" title="Months" sub="Since launch" />
-      </div>
-    </div>
-  </section>
 </DefaultLayout>

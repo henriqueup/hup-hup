@@ -1,0 +1,46 @@
+---
+import { Icon } from "astro-icon/components";
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+---
+
+<DefaultLayout title="Lemonfy">
+  <div class="container flex h-full flex-col gap-4">
+    <h1 class="text-[var(--secondary-100)]">Lemonfy</h1>
+    <div class="flex w-full items-center justify-between">
+      <h3>Quick Video Demo</h3>
+      <span class="!text-right">(Song starts playing at the 0:57 mark)</span>
+    </div>
+    <iframe
+      class="aspect-video w-full"
+      src="https://www.youtube.com/embed/JZ5fAAQY2ek?si=EQC0YVdyu9uuc5X3"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    >
+    </iframe>
+    <div class="mb-8 flex w-full items-center">
+      <Icon class="mr-2 hidden text-[var(--secondary-100)] md:block" name="game-icons:f-clef" size={128} />
+      <div class="flex flex-col gap-4 md:w-4/5">
+        <p>
+          In the video above, the first few bars for the song Nothing Else Matters by Metallica are created within
+          Lemonfy's Editor. To do so, the first step is defining the Song, giving it a name and an artist. Then, an
+          Instrument is added to it, so that finally Bars and Notes can be inputted and some sound can be made.
+        </p>
+        <p>
+          These steps illustrate the basic mechanism Lemonfy uses to define Songs. The Note, which is the most basic
+          part of the proccess, defines the pitch that will be played, as well as it's duration and timing. But these
+          values are all relative. A Note's duration and timing depends on the Bar it is in, which defines a tempo. And
+          the pitch will depend on the Instrument that is used to play.
+        </p>
+        <p>
+          The Instruments themselves also have a few properties and can be created and managed within Lemonfy as well.
+          These properties are used to define the composition and reproduction proccesses. All of this is explained in
+          more details at <a href="https://lemonfy.vercel.app/">Lemonfy</a>'s homepage, so if you're interested, feel
+          free to check it out.
+        </p>
+      </div>
+      <Icon class="hidden text-[var(--secondary-100)] md:block" name="game-icons:g-clef" size={160} />
+    </div>
+  </div>
+</DefaultLayout>

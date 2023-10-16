@@ -12,16 +12,18 @@ export default defineConfig({
   integrations: [
     mdx(),
     tailwind({
-      applyBaseStyles: false
+      applyBaseStyles: false,
     }),
     compress(),
     icon({
       include: {
+        //pnpm i -D @iconify-json/game-icons
         devicon: ["*"],
         ion: ["*"],
-        mdi: ["*"]
-      }
+        mdi: ["*"],
+        "game-icons": ["*"],
+      },
     }),
-    react()
-  ]
+    react(),
+  ],
 });

@@ -43,6 +43,9 @@ devDependencies:
   '@iconify-json/devicon':
     specifier: ^1.1.15
     version: 1.1.15
+  '@iconify-json/game-icons':
+    specifier: ^1.1.3
+    version: 1.1.3
   '@iconify-json/ion':
     specifier: ^1.1.12
     version: 1.1.12
@@ -924,6 +927,12 @@ packages:
 
   /@iconify-json/devicon@1.1.15:
     resolution: {integrity: sha512-74EAkBDEAjx7L0YiVEU4Hud0Erx9G0bjcWwBCIhkXM3Cfy46QeQ/1y/4YnSlDeDwgW2SZm5aPS70/aNxjQFrkA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/game-icons@1.1.3:
+    resolution: {integrity: sha512-cbsSj7dve552e7/CtZQiQyiCbNy+hApgYwgt0q/ZZiOsiJHFWH8/6S8jlIADxoNOmWqbvITwkfkI7AgINsrKcA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

@@ -17,7 +17,9 @@ import { Image } from "astro:assets";
             <slot />
           </ul>
         </nav>
-        <DarkMode />
+        <div id="darkmode-toggle">
+          <DarkMode />
+        </div>
         <ResponsiveToggle />
       </div>
     </div>

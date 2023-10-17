@@ -12,8 +12,8 @@ const Intro = ({ baseStyles }: Props) => {
     <View style={[styles.section]}>
       <Text style={[styles.text, { marginTop: "32px" }]}>
         Bachelor's in Computer Science, with almost 4 years of professional experience in software development, having
-        worked in a few projects and clients, some as tech lead and even architect. I consider myself to be a rational,
-        sincere, flexible and meticulous person.
+        worked in a few projects and clients, some as tech lead and even architect, mostly with scrum, collaborating
+        with PMs, SMs and designers. I consider myself to be a rational, sincere, flexible and meticulous person.
       </Text>
     </View>
   );

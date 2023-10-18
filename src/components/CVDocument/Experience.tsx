@@ -38,7 +38,7 @@ const Experience = ({ baseStyles }: Props) => {
             <Timeline
               baseStyles={styles}
               title="Architect with an international telecommunications client"
-              subtitle="since May/2021 - React, Next.js, Node.js, Oracle"
+              subtitle="since May/2023 - React, Next.js, Node.js, Oracle"
               isSecondLevel
             >
               <Text style={[styles.text]}>

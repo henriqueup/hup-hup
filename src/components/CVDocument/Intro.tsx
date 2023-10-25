@@ -13,7 +13,7 @@ const displayText: Record<Language, string> = {
   with PMs, SMs and designers. I consider myself to be a rational, sincere, flexible and meticulous person.`,
   pt: `Bacharel em Ciência da Computação, com quase 4 anos de experiência profissional em desenvolvimento de software,
   tendo trabalhado em alguns projetos e clientes, como tech lead e até arquiteto, na maioria utilizando scrum e colaborando
-  com PMs, SMs e designers. Eu me considero uma pessoa racional, sincera, flexível e meticulosa`,
+  com PMs, SMs e designers. Eu me considero uma pessoa racional, sincera, flexível e meticulosa.`,
 };
 
 const Intro = ({ baseStyles, language = "en" }: Props) => {

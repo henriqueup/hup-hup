@@ -1,17 +1,40 @@
 import { StyleSheet, Text, View } from "@react-pdf/renderer";
+import { parseDisplayText, type Language } from "../../utils/displayValues";
 import Timeline from "./Timeline";
 
 type ReactPDFStyles = ReturnType<typeof StyleSheet.create>;
 type Props = {
   baseStyles: ReactPDFStyles;
+  language?: Language;
 };
 
-const Education = ({ baseStyles }: Props) => {
+const displayValues = {
+  en: {
+    title: "Education",
+    values: [
+      {
+        title: "Computer Science Bachelor's - UFMG",
+        subtitle: "2016 to 2021 - Belo Horizonte",
+      },
+    ],
+  },
+  pt: {
+    title: "Educação",
+    values: [
+      {
+        title: "Bacharel em Ciência da Computação - UFMG",
+        subtitle: "2016 até 2021 - Belo Horizonte",
+      },
+    ],
+  },
+} as const;
+
+const Education = ({ baseStyles, language = "en" }: Props) => {
   const styles = buildStyles(baseStyles);
 
   return (
     <View style={[styles.section]}>
-      <Text style={[styles.header, styles.h2]}>Education</Text>
+      <Text style={[styles.header, styles.h2]}>{parseDisplayText(displayValues[language].title)}</Text>
       <View
         style={[
           styles.drawing,
@@ -24,8 +47,8 @@ const Education = ({ baseStyles }: Props) => {
       <View style={[styles.section, { margin: "12px 0px" }]}>
         <Timeline
           baseStyles={styles}
-          title="Computer Science Bachelor's - UFMG"
-          subtitle="2016 to 2021 - Belo Horizonte"
+          title={parseDisplayText(displayValues[language].values[0].title)}
+          subtitle={parseDisplayText(displayValues[language].values[0].subtitle)}
           isLastItem
         />
       </View>

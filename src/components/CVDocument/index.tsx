@@ -1,15 +1,17 @@
 import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
-import Subtitle from "./Subtitle";
-import Intro from "./Intro";
-import Experience from "./Experience";
+import type { Language } from "../../utils/displayValues";
 import Education from "./Education";
+import Experience from "./Experience";
+import Intro from "./Intro";
 import Languages from "./Languages";
+import Subtitle from "./Subtitle";
 
 type Props = {
   isDarkmode?: boolean;
+  language?: Language;
 };
 
-const CVDocument = ({ isDarkmode }: Props) => {
+const CVDocument = ({ isDarkmode, language = "en" }: Props) => {
   const styles = buildStyles({ isDarkmode });
 
   return (
@@ -19,10 +21,10 @@ const CVDocument = ({ isDarkmode }: Props) => {
           <Text style={[styles.header, styles.h1]}>Henrique Urban Pessoa</Text>
         </View>
         <Subtitle baseStyles={styles} />
-        <Intro baseStyles={styles} />
-        <Experience baseStyles={styles} />
-        <Education baseStyles={styles} />
-        <Languages baseStyles={styles} />
+        <Intro baseStyles={styles} language={language} />
+        <Experience baseStyles={styles} language={language} />
+        <Education baseStyles={styles} language={language} />
+        <Languages baseStyles={styles} language={language} />
       </Page>
     </Document>
   );

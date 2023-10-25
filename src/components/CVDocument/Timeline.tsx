@@ -48,7 +48,9 @@ const Timeline = ({
       <View style={{ display: "flex", flexDirection: "column" }}>
         <Text style={[isSecondLevel ? styles.h4 : styles.h3, { fontWeight: "bold" }]}>{title}</Text>
         <Text style={[isSecondLevel ? styles.text : styles.h4, { color: "hsl(208 6% 55%)" }]}>{subtitle}</Text>
-        <View style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "4px" }}>{children}</View>
+        <View style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "4px", marginRight: "11px" }}>
+          {children}
+        </View>
       </View>
     </View>
   );

@@ -1,16 +1,55 @@
 import { StyleSheet, Text, View } from "@react-pdf/renderer";
+import { parseDisplayText, type Language } from "../../utils/displayValues";
 
 type ReactPDFStyles = ReturnType<typeof StyleSheet.create>;
 type Props = {
   baseStyles: ReactPDFStyles;
+  language?: Language;
 };
 
-const Languages = ({ baseStyles }: Props) => {
+const displayValues = {
+  en: {
+    title: "Languages",
+    values: [
+      {
+        key: "Portuguese",
+        value: "Native",
+      },
+      {
+        key: "English",
+        value: "Fluent",
+      },
+      {
+        key: "German",
+        value: "Beginner",
+      },
+    ],
+  },
+  pt: {
+    title: "Idiomas",
+    values: [
+      {
+        key: "Portugês",
+        value: "Nativo",
+      },
+      {
+        key: "Inglês",
+        value: "Fluente",
+      },
+      {
+        key: "Alemão",
+        value: "Iniciante",
+      },
+    ],
+  },
+} as const;
+
+const Languages = ({ baseStyles, language = "en" }: Props) => {
   const styles = buildStyles(baseStyles);
 
   return (
     <View style={[styles.section]}>
-      <Text style={[styles.header, styles.h2]}>Languages</Text>
+      <Text style={[styles.header, styles.h2]}>{parseDisplayText(displayValues[language].title)}</Text>
       <View
         style={[
           styles.drawing,
@@ -30,16 +69,22 @@ const Languages = ({ baseStyles }: Props) => {
         }}
       >
         <View style={{ display: "flex", flexDirection: "row", alignItems: "flex-end" }}>
-          <Text style={[styles.h4, { fontWeight: "bold" }]}>Portuguese: </Text>
-          <Text style={[styles.text]}>Native</Text>
+          <Text style={[styles.h4, { fontWeight: "bold" }]}>
+            {parseDisplayText(displayValues[language].values[0].key)}:{" "}
+          </Text>
+          <Text style={[styles.text]}>{parseDisplayText(displayValues[language].values[0].value)}</Text>
         </View>
         <View style={{ display: "flex", flexDirection: "row", alignItems: "flex-end" }}>
-          <Text style={[styles.h4, { fontWeight: "bold" }]}>English: </Text>
-          <Text style={[styles.text]}>Fluent</Text>
+          <Text style={[styles.h4, { fontWeight: "bold" }]}>
+            {parseDisplayText(displayValues[language].values[1].key)}:{" "}
+          </Text>
+          <Text style={[styles.text]}>{parseDisplayText(displayValues[language].values[1].value)}</Text>
         </View>
         <View style={{ display: "flex", flexDirection: "row", alignItems: "flex-end" }}>
-          <Text style={[styles.h4, { fontWeight: "bold" }]}>German: </Text>
-          <Text style={[styles.text]}>Beginner</Text>
+          <Text style={[styles.h4, { fontWeight: "bold" }]}>
+            {parseDisplayText(displayValues[language].values[2].key)}:{" "}
+          </Text>
+          <Text style={[styles.text]}>{parseDisplayText(displayValues[language].values[2].value)}</Text>
         </View>
       </View>
     </View>

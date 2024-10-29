@@ -23,6 +23,10 @@ const displayValues = {
         key: "German",
         value: "Beginner",
       },
+      {
+        key: "Italian",
+        value: "Beginner",
+      },
     ],
   },
   pt: {
@@ -38,6 +42,10 @@ const displayValues = {
       },
       {
         key: "Alemão",
+        value: "Iniciante",
+      },
+      {
+        key: "Italiano",
         value: "Iniciante",
       },
     ],
@@ -68,24 +76,12 @@ const Languages = ({ baseStyles, language = "en" }: Props) => {
           justifyContent: "space-between",
         }}
       >
-        <View style={{ display: "flex", flexDirection: "row", alignItems: "flex-end" }}>
-          <Text style={[styles.h4, { fontWeight: "bold" }]}>
-            {parseDisplayText(displayValues[language].values[0].key)}:{" "}
-          </Text>
-          <Text style={[styles.text]}>{parseDisplayText(displayValues[language].values[0].value)}</Text>
-        </View>
-        <View style={{ display: "flex", flexDirection: "row", alignItems: "flex-end" }}>
-          <Text style={[styles.h4, { fontWeight: "bold" }]}>
-            {parseDisplayText(displayValues[language].values[1].key)}:{" "}
-          </Text>
-          <Text style={[styles.text]}>{parseDisplayText(displayValues[language].values[1].value)}</Text>
-        </View>
-        <View style={{ display: "flex", flexDirection: "row", alignItems: "flex-end" }}>
-          <Text style={[styles.h4, { fontWeight: "bold" }]}>
-            {parseDisplayText(displayValues[language].values[2].key)}:{" "}
-          </Text>
-          <Text style={[styles.text]}>{parseDisplayText(displayValues[language].values[2].value)}</Text>
-        </View>
+        {displayValues[language].values.map((v: { key: string; value: string }) => (
+          <View style={{ display: "flex", flexDirection: "row", alignItems: "flex-end" }}>
+            <Text style={[styles.h4, { fontWeight: "bold" }]}>{parseDisplayText(v.key)}: </Text>
+            <Text style={[styles.text]}>{parseDisplayText(v.value)}</Text>
+          </View>
+        ))}
       </View>
     </View>
   );

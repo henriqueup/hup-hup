@@ -13,19 +13,19 @@ const displayValues = {
     title: "Experience",
     values: [
       {
-        title: "Lemonfy Project",
-        subtitle: "since Jul/2022 - React, Next.js, tRPC, Prisma ORM",
-        content: `Website I've created and been developing which consists basically of a music tablature editor that supports
-        song creation and reproduction (synthesized). In it I've been able to deepen my knowledge and explore
-        different functionalities and technologies, on my own pace.`,
+        title: "Full Stack Software Engineer at Quorum",
+        subtitle: "since Feb/2024 - .NET, MSSQL, VB, JS, HTML",
+        content: `Since joining Quorum, I've experienced a novel business in my career, working with a Government Relations product.
+        Not only that, but the product itself is almost 30 years old, meaning I've been learning a lot about legacy system maintenance
+        and conciliating generational paradigm shifts.`,
       },
       {
         title: "Full Stack Software Engineer at dti digital",
-        subtitle: "since 03/16/2021",
+        subtitle: "Mar/2021 to Feb/2024",
         content: [
           {
             title: "Architect with an international telecommunications client",
-            subtitle: "since May/2023 - React, Next.js, Node.js, Oracle",
+            subtitle: "May/2023 to Feb/2024 - React, Next.js, Node.js, Oracle",
             content: `Working as the architect / senior full stack engineer for a client in the telecommunication market, I
             was able to quickly pickup their Node.js and Oracle backend stack, proposing many improvements and a new
             API structure;`,
@@ -64,19 +64,19 @@ const displayValues = {
     title: "Experiência",
     values: [
       {
-        title: "Projeto Lemonfy",
-        subtitle: "desde Jul/2022 - React, Next.js, tRPC, Prisma ORM",
-        content: `Website que criei e estou desenvolvendo, composto basicamente por um editor de tablatura musical
-        que suporta a criação e reprodução de músicas (de forma sintetizada). Nele, pude aprofundar meu conhecimento
-        e explorar diferentes funcionalidades e tecnologias, no meu próprio ritmo.`,
+        title: "Full Stack Software Engineer na Quorum",
+        subtitle: "desde Fev/2024 - .NET, MSSQL, VB, JS, HTML",
+        content: `Dese me juntar à Quorum, tenho passado por uma área de negócio nova na minha carreira, trabalhando com um produto de
+        Relações Governamentais. Além disso, mas o produto também tem quase 30 anos, ou seja, tenho aprendido bastante sobre manutenção
+        de sistemas legado e como conciliar mudanças de paradigmas entre gerações.`,
       },
       {
         title: "Full Stack Software Engineer na dti digital",
-        subtitle: "desde 16/03/2021",
+        subtitle: "Mar/2021 até Fev/2024",
         content: [
           {
             title: "Arquiteto com um cliente internacional de telecomunicações",
-            subtitle: "desde Mai/2023 - React, Next.js, Node.js, Oracle",
+            subtitle: "Mai/2023 até Fev/2024 - React, Next.js, Node.js, Oracle",
             content: `Trabalhando como arquiteto / senior full stack engineer para um cliente no mercado de telecomunicações,
             fui capaz de rapidamente me adapatar ao seu stack backed com Node.js e Oracle, propondo muitas melhorias
             e uma nova estrutura de APIs;`,

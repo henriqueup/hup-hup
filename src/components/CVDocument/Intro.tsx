@@ -7,11 +7,18 @@ type Props = {
   language?: Language;
 };
 
+const startDate = new Date("2020-02-03");
+const yearsOfExperience = (Date.now() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 365);
+
 const displayText: Record<Language, string> = {
-  en: `Bachelor's in Computer Science, with almost 4 years of professional experience in software development, having
+  en: `Bachelor's in Computer Science, with ${yearsOfExperience.toFixed(
+    1
+  )} years of professional experience in software development, having
   worked in a few projects and clients, some as tech lead and even architect, mostly with scrum and collaborating
   with PMs, SMs and designers. I consider myself to be a rational, sincere, flexible and meticulous person.`,
-  pt: `Bacharel em Ciência da Computação, com quase 4 anos de experiência profissional em desenvolvimento de software,
+  pt: `Bacharel em Ciência da Computação, com ${yearsOfExperience.toFixed(
+    1
+  )} anos de experiência profissional em desenvolvimento de software,
   tendo trabalhado em alguns projetos e clientes, como tech lead e até arquiteto, na maioria utilizando scrum e colaborando
   com PMs, SMs e designers. Eu me considero uma pessoa racional, sincera, flexível e meticulosa.`,
 };
